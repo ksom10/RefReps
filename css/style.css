@@ -1,0 +1,405 @@
+/* 
+
+Flashcards App
+
+.title {
+    text-align: center;
+}
+
+.term {
+    border: solid 5px black;
+    border-radius: 15px;
+    text-align: center;
+    width: 45%;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.definition {
+    border: solid 5px black;
+    text-align: center;
+    width: 45%;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 15px;
+    display: none;
+}
+
+.button {
+    text-align: center;
+    margin-top: 100px;
+}
+
+button {
+    color: white;
+    background-color: rgb(78, 227, 78);
+    padding: 20px;
+    border-radius: 15px;
+}
+
+button:hover {
+    transform: scale(1.1);
+} */
+
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+:root {
+    --hue-neutral: 210;
+    --hue-wrong: 0;
+    --hue-correct: 145;
+}
+
+body {
+    --hue: var(--hue-neutral);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccf5f3;
+}
+
+body.correct {
+    background-color: #00662b;
+}
+
+body.wrong {
+    background-color:  #660000;
+}
+
+#game {
+    width: 100%;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 800px;
+    max-width: 80%;
+    background-color: #1c2f3b;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+    color: white;
+}
+
+.logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img {
+    width: 150px;
+    height: 125px;
+}
+.points-cont{
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.btn {
+    --hue: var(--hue-neutral);
+    border: 1px solid hsl(var(--hue), 100%, 30%);
+    background-color: #00b6cd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    outline: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    border-color: black;
+}
+
+.btn.correct {
+    background-color: #00ff6a;
+    color: black;
+}
+
+.btn.wrong {
+    background-color: #ff0000;
+}
+
+.start-btn, .next-btn, .flip-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}
+
+.round-time-bar {
+    margin: 1rem;
+    overflow: hidden;
+    display: none;
+  }
+  .round-time-bar div {
+    height: 5px;
+    animation: roundtime calc(var(--duration) * 1s) steps(var(--duration))
+      forwards;
+    transform-origin: left center;
+    background: linear-gradient(to bottom, red, #900);
+  }
+  
+  .round-time-bar[data-style="smooth"] div {
+    animation: roundtime calc(var(--duration) * 1s) linear forwards;
+  }
+  
+  .round-time-bar[data-style="fixed"] div {
+    width: calc(var(--duration) * 5%);
+  }
+  
+  .round-time-bar[data-color="blue"] div {
+    background: linear-gradient(to bottom, #64b5f6, #1565c0);
+  }
+  
+  @keyframes roundtime {
+    to {
+      /* More performant than `width` */
+      transform: scaleX(0);
+    }
+  }
+
+
+  .status-bar {
+    width: 50px; /* Adjust the width as needed */
+    height: 200px; /* Height of the status bar */
+    background-color: #f0f0f0; /* Background color of the status bar */
+    border: 1px solid #ccc; /* Border for the status bar */
+    position: relative;
+    margin-left: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-bar-fill {
+    width: 100%;
+    background-color: #28c2ce; /* Color for the filled portion representing correct answers */
+    position: absolute;
+    bottom: 0;
+}
+
+.status-text {
+    z-index: 100;
+}
+
+
+
+.pass-popup, .fail-popup {
+    display: none;
+    width: 800px;
+    max-width: 80%;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 0 10px 2px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pass-popup h1, .fail-popup h1 {
+    text-align: center;
+}
+
+.pass-result, .fail-result {
+    text-align: center;
+}
+
+.button-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.restart-btn, .course-btn {
+    margin-left: 10px;
+    padding: 15px;
+    font-size: 15px;
+}
+
+.question-text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.question-img {
+    width: 185px;
+    height: 185px;
+    display: none;
+    margin-bottom: 10px;
+    object-fit: contain;
+}
+
+.question-img img {
+    width: 100%;
+    height: 100%;
+}
+
+#question-vid {
+    width: 450px;
+    height: 250px;
+    margin-bottom: 10px;
+    object-fit: contain;
+    align-items: center;
+    justify-content: center;
+}
+
+#question-video {
+    height: 100%;
+    width: 100%;
+}
+
+
+
+.question-cont {
+    font-size: 25px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+img {
+    width: 150px;
+    height: 150px;
+}
+
+.points {
+    font-size: 2em;
+    animation: points 1s ease-out;
+    text-align: center;
+}
+
+.total-points {
+    font-size: 1.5em;
+    text-align: center;
+    margin-top: 15px;
+    color: white;
+}
+
+@keyframes points {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-50px); }
+}
+
+.count-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.count-cont select {
+    padding: 12px;
+    font-size: 15px;
+    border: solid 1px black;   
+    border-radius: 5px;
+    background-color: #00b6cd;
+    color: white;
+}
+
+.rulebook-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.rulebook-cont select {
+    padding: 12px;
+    font-size: 15px;
+    border: solid 1px black;
+    border-radius: 5px;
+    background-color: #00b6cd;
+    color: white;
+    text-align: center;
+}
+
+select option {
+    background-color: white;
+    color: black;
+    text-align: left;
+}
+
+
+#icon {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px; /* Adjust as needed */
+}
+
+#whistle, #whistle-back {
+    position: absolute;
+}
+#whistle {
+    width: 65px;
+    height: 50px;
+    cursor: pointer;
+    z-index: 2;
+    margin-left: 1px;
+}
+
+#whistle-back {
+    width: 75px;
+    height: 70px;
+    margin-left: 3px;
+    margin-bottom: 2px;
+}
+
+#popup {
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 1000; /* Make sure the pop-up is on top of everything else */
+}
+
+#video {
+    width: 800px; /* Adjust as needed */
+    max-height: 80%; /* Adjust as needed */
+}

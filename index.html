@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RefReps Flashcard Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="game">
+    <div class="main">
+        <div class="container">
+             <div class="logo">
+                <img src="images/logo.png" alt="RefReps Logo">
+            </div> 
+            <div id="question-container" class="hide">
+                <div id="question-text" class="question-text">
+                    <div class="question-img">
+                        <img id="question-image"  src="" alt="Question Image">
+                        
+                </div>
+                <div id="question-vid" class="hide" aria-colspan="">
+                    <video id="question-video" src="" ></video>
+                </div>            
+                <div id="question" class="question-cont">Question</div>
+            </div>
+            <div id="answer-buttons" class="btn-grid hide">
+                <button class="btn img" data-answer-index="0"><img src="" alt="Answer 1"></button>
+                <button class="btn img" data-answer-index="1"><img src="" alt="Answer 2"></button>
+                <button class="btn img" data-answer-index="2"><img src="" alt="Answer 3"></button>
+                <button class="btn img" data-answer-index="3"><img src="" alt="Answer 4"></button>
+            </div>
+            </div>
+            <div class="rulebook-cont">
+                <select id="questionCategory">
+                    <option value="all">All Rulebooks</option>
+                    <option value="NFHS">NFHS</option>
+                    <option value="NCAA">NCAA</option>
+                </select>
+            </div>
+            <div class="count-cont">
+            <select id="questionCount">
+                <option value="10">10 Questions</option>
+                <option value="20">20 Questions</option>
+                <option value="all">All Questions</option>
+            </select>
+        </div>
+            <div class="controls">
+                <button id="start-btn" class="start-btn btn">Start</button>
+                <button id="next-btn" class="next-btn btn hide">Next</button>
+                <button id="flip-btn" class="flip-btn btn hide">Flip</button>
+            </div>
+            <div id="timer" class="round-time-bar" data-style="smooth" style="--duration: 15;">
+                <div class="time-progress"></div>
+            </div>
+            
+
+            <div class="points-cont">
+                <div id="points" class="points hide">+0</div>
+                <div id="total-points" class="total-points hide">Total Points: 0</div>
+            </div>
+        </div>
+
+        <div id="status" class="status-bar hide">
+            <div class="status-bar-fill" id="status-fill"></div>
+            <span class="status-text" id="status-text"></span>
+        </div>
+
+        <div class="pass-popup hide">
+            <h1>Congratulations, You Passed</h1>
+            <div id="result" class="pass-result">Result</div>
+            <div class="button-cont">
+                <button id="restart-btn" class="restart-btn btn">Restart</button>
+                <button id="course-btn" class="course-btn btn">Next Course</button>
+            </div>
+        </div>
+        <div class="fail-popup hide">
+            <h1>You Failed, try again.</h1>
+            <div id="result-two" class="fail-result">Result</div>
+            <div class="button-cont">
+            <button id="restart-btn" class="restart-btn btn">Restart</button>
+        </div>  
+        </div>
+    </div>
+
+    
+
+    
+<div id="icon" style="display: none;">
+    <img id="whistle"  src="images/whistle.png" alt="Whistle Image">
+    <img id="whistle-back"  src="images/whistleTwo.png" alt="Whistle Image">
+</div>
+
+<div id="popup" style="display: none;">
+    <video id="video" src="" controls></video>
+</div>
+</div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
